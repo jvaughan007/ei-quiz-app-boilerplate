@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 /**
  * Example store structure
  */
@@ -48,6 +49,17 @@ const store = {
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
 // These functions return HTML templates
+function generateQuestionTemplate() {
+
+}
+
+function generateAnswerTemplate() {
+
+}
+
+function generateResultsTemplate() {
+  
+}
 
 /********** RENDER FUNCTION(S) **********/
 
