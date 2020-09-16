@@ -48,9 +48,10 @@ const store = {
 
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
-// These functions return HTML templates
-function generateQuestionTemplate() {
+// The below functions return HTML templates
 
+function generateQuestionTemplate() {
+// code needs to create the div for the question
 }
 
 function generateAnswerTemplate() {
