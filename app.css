@@ -9,9 +9,12 @@
 
 @font-face { font-family: get_schwifty; src: url('get_schwifty.ttf'); } 
 
-h1{
+
+header h1{
   font-family: get_schwifty;
 }
+
+
 
 body {
   width: 90%;
