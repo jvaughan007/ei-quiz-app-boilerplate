@@ -3,6 +3,15 @@
  * Example store structure
  */
 const store = {
+  templates: [
+    generateWelcomePageTemplate, 
+    generateQuestionTemplate,
+    generateQuestionNumberTemplate,
+    generateCurrentScoreTemplate,
+    generateAnswerTemplate, 
+    generateFeedbackTemplate,
+    generateResultsTemplate
+  ],
   // 5 or more questions are required
   questions: [
     {
@@ -50,9 +59,23 @@ const store = {
 
 // The below functions return HTML templates
 
+function generateAPage() {
+  const pageArr = page.map(templates, index);
+}
+
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
-  $
+  let html = 
+  `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
+      <h2>CLICK BELOW TO START!</h2>
+      <div>
+        <button class="button" id="start">Start Quiz</button> 
+      </div>;`;
+
+      function renderWelcome() {
+        $('.mainOfDom').html(html);
+      }
+
 
   // Must be usable by a keyboard and mouse******
 
@@ -136,9 +159,9 @@ function generateResultsTemplate() {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
-function renderWelcome() {
-  let html = generateWelcomePageTemplate(store);
-  $('.welcome').html(html);
+function render() {
+  let html  
+  $('main').html(html);
   
   // this is the general render function that will be at the end of all above functions
 }
