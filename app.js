@@ -135,6 +135,15 @@ function generateResultsTemplate() {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
+function render() {
+  // this is the general render function that will be at the end of all above functions
+}
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+// ***Need event listeners for buttons***
+  // button is set to a class
+  // buttons also have id's
+    // start, submit, nextQ and retryQuiz
