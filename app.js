@@ -52,6 +52,7 @@ const store = {
 
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
+  $
 
   // Must be usable by a keyboard and mouse******
 
@@ -135,7 +136,10 @@ function generateResultsTemplate() {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
-function render() {
+function renderWelcome() {
+  let html = generateWelcomePageTemplate(store);
+  $('.welcome').html(html);
+  
   // this is the general render function that will be at the end of all above functions
 }
 
