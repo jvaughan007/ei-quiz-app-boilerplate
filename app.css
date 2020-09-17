@@ -6,3 +6,9 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+@font-face { font-family: get_schwifty; src: url('get_schwifty.ttf'); } 
+
+h1{
+  font-family: get_schwifty;
+}
