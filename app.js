@@ -3,15 +3,7 @@
  * Example store structure
  */
 const store = {
-  templates: [
-    generateWelcomePageTemplate, 
-    generateQuestionTemplate,
-    generateQuestionNumberTemplate,
-    generateCurrentScoreTemplate,
-    generateAnswerTemplate, 
-    generateFeedbackTemplate,
-    generateResultsTemplate
-  ],
+  
   // 5 or more questions are required
   questions: [
     {
@@ -65,16 +57,11 @@ function generateAPage() {
 
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
-  let html = 
-  `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
-      <h2>CLICK BELOW TO START!</h2>
-      <div>
-        <button class="button" id="start">Start Quiz</button> 
-      </div>;`;
-
-      function renderWelcome() {
-        $('.mainOfDom').html(html);
-      }
+  return `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
+  <h2>CLICK BELOW TO START!</h2>
+  <div>
+      <button class="button" id="start">Start Quiz</button> 
+  </div>`;
 
 
   // Must be usable by a keyboard and mouse******
@@ -86,8 +73,22 @@ function generateWelcomePageTemplate() {
   // Must render at the end
 }
 
-function generateQuestionTemplate() {
+function generateQuestionTemplate(item) {
   // Code needs to create the page template for the question div of the quiz
+  return `<h2>Question ${store.questionNumber}</h2>
+  <p>${item.question}</p>
+  <div>
+      <form>
+          <label><input type="radio" name="selector" id="a" val="${questions.answer[0]}">${questions.answer[0]}</label>
+          <label><input type="radio" name="selector" id="b" val="${questions.answer[1]}">${questions.answer[1]}</label>         
+          <label><input type="radio" name="selector" id="c" val="${questions.answer[2]}">${questions.answer[2]}</label>
+          <label><input type="radio" name="selector" id="d" val="${questions.answer[3]}">${questions.answer[3]}</label>
+      </form>
+  </div>
+  <div>
+      <button class="button" id="submit" type="submit">Submit</button>
+  </div>`;
+// **********above: may need to mve button in to form to make keyboard accesible***********
 
   // Must be usable by a keyboard and mouse******
 
@@ -96,30 +97,29 @@ function generateQuestionTemplate() {
   // Must call the render function at end
 }
 
-function generateAnswerTemplate() {
-  // Code needs to create a template for the answer choices div of the quiz ***must be in a form***
-
-  // Must be usable by a keyboard and mouse******
-
-  // Needs to pull the answers from the store and orient them in a radial selector form
-
-  // Upon submitting an answer, users should:
-  // * receive textual feedback about their answer. If they were incorrect, they should be told the correct answer.
-  // * be moved onto the next question (or interact with an element to move on).
-
-  // Must call the render function at end if a standalone div
+function generateCorrectAnswerTemplate() {
+  // Code needs to create a template for the correct answer and add +1 to total score
+  store.score++;
+  return `<h2>Ahhh, yeaaahhhh. Get Schwifty!</h2>
+  <img src="images/schwifty.gif" alt="I'm Mr. Bulldops!">
+  <h3 id="totalScore">You got ${store.score} right so far!</h3>
+  <div>
+      <button class="button" id="nextQ">Continue</button>
+  </div>`;
 }
 
-function generateFeedbackTemplate() {
-  // Code needs to create a teplate for displaying feedback
-
-  // Create an if statement that checks if the submitted answer choice was the correct answer
-  //*** / 1.) If right, it will render a template with a happy meseeks with a positive statement and the running score
-  //*** // 2.) If wrong, it will render a template with a meseeks filled with existential terror, a wrong answer informative statement and the running score
+function generateWrongAnswerTemplate() {
+  // Code needs to create a template for the wrong answer
+  return `<h2>Wrong answer, broh!</h2>
+  <img src="images/donthate.gif" alt="Don't hate the player, hate the game, son!">
+  <div>
+      <button class="button" id="nextQ">Continue</button>
+  </div>`;
+  
   
   // Must have a 'next question' button at the end, ***regardless of if statement result***
 
-  // Must call the render function at end
+ 
 } 
 
 function generateCurrentScoreTemplate() {
@@ -159,9 +159,8 @@ function generateResultsTemplate() {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
-function render() {
-  let html  
-  $('main').html(html);
+function render(html) {
+  $("main").html(html);
   
   // this is the general render function that will be at the end of all above functions
 }
@@ -169,8 +168,40 @@ function render() {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+function handleStartQuiz(){
+  $("main").on("click", "#start", e =>{
+    store.quizStarted = true;
+    let question = generateQuestionTemplate(store.questions[store.questionNumber]);
+    render(question);
+  });
+}
 
+function handleSubmitAnswer(){
+  // Create an if statement that checks if the submitted answer choice was the correct answer
+  //*** / 1.) If right, it will render a template with a happy meseeks with a positive statement and the running score
+  //*** // 2.) If wrong, it will render a template with a meseeks filled with existential terror, a wrong answer informative statement and the running score
+  $("main").on("submit", "form", e =>{
+    e.preventDefault;
+    let currentQuestion = store.questions[store.questionNumber];
+    let answer = $(`input[name=selector:checked]`).val();
+    if  (answer === currentQuestion.answer) {
+      generateCorrectAnswerTemplate();
+    } else {
+
+    }
+  })
+}
 // ***Need event listeners for buttons***
   // button is set to a class
   // buttons also have id's
     // start, submit, nextQ and retryQuiz
+
+
+function main() {
+  console.log(store.questions);
+  handleStartQuiz();
+  let startPage = generateWelcomePageTemplate();
+  render(startPage);
+}
+
+$(main);
