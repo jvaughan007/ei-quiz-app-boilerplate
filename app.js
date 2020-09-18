@@ -20,7 +20,7 @@ const store = {
       question: 'What was name of Rick\'s Anatomy Park attraction?',
       answers: [
         'Aortic Thunder',
-        'Pirates of th Pancreas',
+        'Pirates of the Pancreas',
         'The Spleen Splitter',
         'Liver Free, Die Hard'
       ],
