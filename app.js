@@ -161,14 +161,20 @@ function generateQuestionTemplate() {
   <p>${item.question}</p>
   <div>
       <form class="form">
-          <input type="radio" name="selector" id="a" value="${item.answers[0]}">
-          <label>${item.answers[0]}</label>
-          <input type="radio" name="selector" id="b" value="${item.answers[1]}">
-          <label>${item.answers[1]}</label>
-          <input type="radio" name="selector" id="c" value="${item.answers[2]}">         
-          <label>${item.answers[2]}</label>
-          <input type="radio" name="selector" id="d" value="${item.answers[3]}">
-          <label>${item.answers[3]}</label>
+
+        <div class="align-left">
+
+        
+        <label><input type="radio" name="selector" id="a" value="${item.answers[0]}">${item.answers[0]}</label>
+        
+        <label><input type="radio" name="selector" id="b" value="${item.answers[1]}">${item.answers[1]}</label>
+                 
+        <label><input type="radio" name="selector" id="c" value="${item.answers[2]}">${item.answers[2]}</label>
+        
+        <label><input type="radio" name="selector" id="d" value="${item.answers[3]}">${item.answers[3]}</label>
+
+        </div>
+
           <div>
             <button class="submit" id="submit-btn" type="submit">Submit</button>
           </div>
