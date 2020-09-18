@@ -51,9 +51,7 @@ const store = {
 
 // The below functions return HTML templates
 
-function generateAPage() {
-  const pageArr = page.map(templates, index);
-}
+
 
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
@@ -79,16 +77,16 @@ function generateQuestionTemplate(item) {
   <p>${item.question}</p>
   <div>
       <form>
-          <label><input type="radio" name="selector" id="a" val="${questions.answer[0]}">${questions.answer[0]}</label>
-          <label><input type="radio" name="selector" id="b" val="${questions.answer[1]}">${questions.answer[1]}</label>         
-          <label><input type="radio" name="selector" id="c" val="${questions.answer[2]}">${questions.answer[2]}</label>
-          <label><input type="radio" name="selector" id="d" val="${questions.answer[3]}">${questions.answer[3]}</label>
+          <label><input type="radio" name="selector" id="a" val="${item.answers[0]}">${item.answers[0]}</label>
+          <label><input type="radio" name="selector" id="b" val="${item.answers[1]}">${item.answers[1]}</label>         
+          <label><input type="radio" name="selector" id="c" val="${item.answers[2]}">${item.answers[2]}</label>
+          <label><input type="radio" name="selector" id="d" val="${item.answers[3]}">${item.answers[3]}</label>
       </form>
   </div>
   <div>
-      <button class="button" id="submit" type="submit">Submit</button>
+      <button class="button" id="submit-btn" type="submit">Submit</button>
   </div>`;
-// **********above: may need to mve button in to form to make keyboard accesible***********
+  // **********above: may need to mve button in to form to make keyboard accesible***********
 
   // Must be usable by a keyboard and mouse******
 
@@ -99,7 +97,6 @@ function generateQuestionTemplate(item) {
 
 function generateCorrectAnswerTemplate() {
   // Code needs to create a template for the correct answer and add +1 to total score
-  store.score++;
   return `<h2>Ahhh, yeaaahhhh. Get Schwifty!</h2>
   <img src="images/schwifty.gif" alt="I'm Mr. Bulldops!">
   <h3 id="totalScore">You got ${store.score} right so far!</h3>
@@ -182,14 +179,15 @@ function handleSubmitAnswer(){
   //*** // 2.) If wrong, it will render a template with a meseeks filled with existential terror, a wrong answer informative statement and the running score
   $("main").on("submit", "form", e =>{
     e.preventDefault;
+    console.log("Reading Clicked");
     let currentQuestion = store.questions[store.questionNumber];
-    let answer = $(`input[name=selector:checked]`).val();
+    let answer = $(`input[name=selector:checked]`).value();
     if  (answer === currentQuestion.answer) {
       generateCorrectAnswerTemplate();
-    } else {
-
-    }
-  })
+    } else { generateWrongAnswerTemplate();
+    };
+    render(answer);
+  });
 }
 // ***Need event listeners for buttons***
   // button is set to a class
@@ -202,6 +200,7 @@ function main() {
   handleStartQuiz();
   let startPage = generateWelcomePageTemplate();
   render(startPage);
+  
 }
 
 $(main);
