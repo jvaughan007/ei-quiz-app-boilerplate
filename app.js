@@ -24,7 +24,7 @@ const store = {
         'The Spleen Splitter',
         'Liver Free, Die Hard'
       ],
-      correctAnswer: 'Pirates of th Pancreas'
+      correctAnswer: 'Pirates of the Pancreas'
     },
     {
       question: 'What is the number of Rick’s universe?',
