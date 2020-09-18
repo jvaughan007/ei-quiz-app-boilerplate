@@ -1,0 +1,14 @@
+
+
+@media all and (min-width: 600px) {
+    header h1 {
+      font-size: 60px;
+    }
+    header h2 {
+      font-size: 35px;
+    }
+    img, div{
+        max-width: 100%;
+    }
+
+  };
