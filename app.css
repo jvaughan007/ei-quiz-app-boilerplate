@@ -86,6 +86,12 @@ main label {
   line-height: 25px;
 }
 
+input[type="radio"] {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 0;
+}
+
 
 
 @media all and (min-width: 462px){

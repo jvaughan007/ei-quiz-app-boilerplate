@@ -173,6 +173,8 @@ function generateQuestionTemplate() {
             <button class="submit" id="submit-btn" type="submit">Submit</button>
           </div>
       </form>
+      <p>Score: ${store.score}/${store.questionNumber}</p>
+      <p>Questions Left: ${10 - store.questionNumber}</p>
   </div>`;
 
   
@@ -189,7 +191,8 @@ function generateCorrectAnswerTemplate() {
   // Code needs to create a template for the correct answer and add +1 to total score
   return `<h2>Ahhh, yeaaahhhh. Get Schwifty!</h2>
   <img src="images/schwifty.gif" alt="I'm Mr. Bulldops!">
-  <h3 id="totalScore">You got ${store.score} right so far!</h3>
+  <h3 id="totalScore">You got ${store.score} out of ${store.questionNumber} right so far!</h3>
+  <p>You've got ${10 - store.questionNumber} to go!</p>
   <div>
       <button class="button" id="nextQ">Continue</button>
   </div>`;
@@ -199,6 +202,12 @@ function generateWrongAnswerTemplate() {
   // Code needs to create a template for the wrong answer
   return `<h2>Wrong answer, broh!</h2>
   <img src="images/donthate.gif" alt="Don't hate the player, hate the game, son!">
+  <div class="score/questions">
+  <p>Ooh-la-la, your running score is ${store.score} out of ${store.questionNumber}!</p>
+  </div>
+  <div>
+  <p>You got *Uuurp* ${10 - store.questionNumber}'s left there, don't be a Jerry.</p>
+  </div>
   <div>
       <button class="button" id="nextQ">Continue</button>
   </div>`;
@@ -281,6 +290,8 @@ function evaluateAnswer() {
   if (answer === currentQuestion.correctAnswer) {
     store.score++;
     template = generateCorrectAnswerTemplate();
+    } else if (answer === undefined) {
+      throw new ErrorEvent('Select an Answer, Jerry.');
     } else {
       template = generateWrongAnswerTemplate();
     };
@@ -324,6 +335,7 @@ function handleRetryQuiz() {
     
   });
 }
+
 // ***Need event listeners for buttons***
   // button is set to a class
   // buttons also have id's
