@@ -7,8 +7,16 @@
   *
 */
 
-@font-face { font-family: get_schwifty; src: url('get_schwifty.ttf'); } 
-
+@font-face { font-family: get_schwifty; src: url('get_schwifty.ttf'); }
+ 
+.align-left{
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 25% 40px 25%;
+  font-size: 15px;
+  font-family: Orbitron;
+}
 
 header h1{
   font-family: get_schwifty;
@@ -74,6 +82,7 @@ img, div, header {
 }
 
 form {
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin: 40px auto 40px auto;
@@ -82,9 +91,15 @@ form {
 }
 
 main label {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 10px -60px;
   line-height: 25px;
+
+  
 }
+input[type="radio"]{
+  margin-right: 20px;
+}
+
 
 
 
