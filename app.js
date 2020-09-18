@@ -37,7 +37,7 @@ const store = {
       correctAnswer: 'C-137'
     },
     {
-      question: 'With which Disney channel show Rick and Morty shared some easter eggs?',
+      question: 'Easter eggs of what following show were featured in Rick & Morty?',
       answers: [
         'Phil of the Future',
         'That\'s So Raven',
@@ -164,14 +164,14 @@ function generateQuestionTemplate() {
 
         <div class="align-left">
 
-        
-        <label><input type="radio" name="selector" id="a" value="${item.answers[0]}">${item.answers[0]}</label>
-        
-        <label><input type="radio" name="selector" id="b" value="${item.answers[1]}">${item.answers[1]}</label>
-                 
-        <label><input type="radio" name="selector" id="c" value="${item.answers[2]}">${item.answers[2]}</label>
-        
-        <label><input type="radio" name="selector" id="d" value="${item.answers[3]}">${item.answers[3]}</label>
+        <input type="radio" name="selector" id="a" value="${item.answers[0]}">
+        <label>${item.answers[0]}</label>
+        <input type="radio" name="selector" id="b" value="${item.answers[1]}">
+        <label>${item.answers[1]}</label>
+        <input type="radio" name="selector" id="c" value="${item.answers[2]}">        
+        <label>${item.answers[2]}</label>
+        <input type="radio" name="selector" id="d" value="${item.answers[3]}">
+        <label>${item.answers[3]}</label>
 
         </div>
 
@@ -197,8 +197,8 @@ function generateCorrectAnswerTemplate() {
   // Code needs to create a template for the correct answer and add +1 to total score
   return `<h2>Ahhh, yeaaahhhh. Get Schwifty!</h2>
   <img src="images/schwifty.gif" alt="I'm Mr. Bulldops!">
-  <h3 id="totalScore">You got ${store.score} out of ${store.questionNumber} right so far!</h3>
-  <p>You've got ${10 - store.questionNumber} to go!</p>
+  <h3 id="totalScore">You got ${store.score} out of ${store.questionNumber + 1} right so far!</h3>
+  <p>You've got ${10 - (store.questionNumber + 1)} questions left!</p>
   <div>
       <button class="button" id="nextQ">Continue</button>
   </div>`;
@@ -209,10 +209,10 @@ function generateWrongAnswerTemplate() {
   return `<h2>Wrong answer, broh!</h2>
   <img src="images/donthate.gif" alt="Don't hate the player, hate the game, son!">
   <div class="score/questions">
-  <p>Ooh-la-la, your running score is ${store.score} out of ${store.questionNumber}!</p>
+  <p>Ooh-la-la, your running score is ${store.score} out of ${store.questionNumber + 1}!</p>
   </div>
   <div>
-  <p>You got *Uuurp* ${10 - store.questionNumber}'s left there, don't be a Jerry.</p>
+  <p>You got *Uuurp* ${10 - (store.questionNumber + 1)} questions's left, don't be a Jerry.</p>
   </div>
   <div>
       <button class="button" id="nextQ">Continue</button>
@@ -224,33 +224,12 @@ function generateWrongAnswerTemplate() {
  
 } 
 
-function generateCurrentScoreTemplate() {
-  // Code needs to create a template for the div that will display the total score of the quiz so far
-
-  // Must be usable by a keyboard and mouse******
-
-  // Needs to pull the question number at that point in the quiz from the store
-
-  // Needs to reset the score after the quiz has been reset to the welcome page
-
-  // Must call the render function at end if a standalone div
-}
-
-function generateQuestionNumberTemplate() {
-  // Code needs to create a template for the div that will show which question they're on (i.e. - Question 7 of 10)
-
-  // Must be usable by a keyboard and mouse******
-
-  // Needs to pull the quiz score at that point in the quiz from the store
-
-  // Must call the render function at end if a standalone div
-}
 
 function generateResultsTemplate() {
   // Code needs to create a template for the div that will show the final results page
   console.log('generateResultsTemplate is running');
   // Users should be shown their overall score at the end of the quiz. In other words, how many questions they got right out of the total questions asked.
-  return `<h2 id="totalScore">Total Score</h2>
+  return `<h2 id="totalScore">Your score was ${store.score}/${store.questionNumber} </h2>
             <img src="images/finaldance.gif">
             <div>
                 <button class="button" id="retryQuiz">Retry</button>
