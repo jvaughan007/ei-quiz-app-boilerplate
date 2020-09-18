@@ -7,24 +7,104 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: 'What is the meaning of "Wubba Lubba Dub Dub"?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'I love my grandkids',
+        'Let\'s party',
+        'I am in great pain',
+        'That was a CLOSE ONE'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'I am in great pain'
     },
     {
-      question: 'What is the current year?',
+      question: 'What was name of Rick\'s Anatomy Park attraction?',
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'Aortic Thunder',
+        'Pirates of th Pancreas',
+        'The Spleen Splitter',
+        'Liver Free, Die Hard'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 'Pirates of th Pancreas'
+    },
+    {
+      question: 'What is the number of Rick’s universe?',
+      answers: [
+        'C-137',
+        'A-199',
+        'The Frumubulon Univers',
+        'C-245'
+      ],
+      correctAnswer: 'C-137'
+    },
+    {
+      question: 'With which Disney channel show Rick and Morty shared some easter eggs?',
+      answers: [
+        'Phil of the Future',
+        'That\'s So Raven',
+        'Gravity Falls',
+        'Phineas and Ferb'
+      ],
+      correctAnswer: 'Gravity Falls'
+    },
+    {
+      question: 'What is a "Mr. Meeseeks"?',
+      answers: [
+        'A Helper',
+        'A Cool Blue Guy',
+        'A problem solver',
+        'All of the Above'
+      ],
+      correctAnswer: 'All of the Above'
+    },
+    {
+      question: 'What was an item that came from Gravity Falls?',
+      answers: [
+        'Hoola Hoop',
+        'Pen and Notepad',
+        'Radio and Antenna',
+        'Onion'
+      ],
+      correctAnswer: 'Pen and Notepad'
+    },
+    {
+      question: 'How old is a Morty',
+      answers: [
+        '9',
+        '12',
+        '16',
+        '14'
+      ],
+      correctAnswer: '14'
+    },
+    {
+      question: 'What is Beth\'s profession?',
+      answers: [
+        'Horse Surgeon',
+        'Shoe Maker',
+        'Wedding Planner',
+        'Dancing Queen'
+      ],
+      correctAnswer: 'Horse Surgeon'
+    },
+    {
+      question: 'What is the worth of a Schmeckle?',
+      answers: [
+        'About $4',
+        'Like at least $10',
+        'Woah! Could it BE $148',
+        'I guess it could also be $10,000'
+      ],
+      correctAnswer: 'Woah! Could it BE $148'
+    },
+    {
+      question: 'Who are the creators of the show',
+      answers: [
+        'Matt Stone & Trey Parker',
+        'Matt Groening & J.G Quintel',
+        'Justin Roiland & Dan Harmon',
+        'The Wachowski Brothers'
+      ],
+      correctAnswer: 'Justin Roiland & Dan Harmon'
     }
   ],
   quizStarted: false,
