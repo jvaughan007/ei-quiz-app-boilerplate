@@ -55,11 +55,12 @@ const store = {
 
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
-  return `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
+  const template = `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
   <h2>CLICK BELOW TO START!</h2>
   <div>
       <button class="button" id="start">Start Quiz</button> 
   </div>`;
+  render(template);
 
 
   // Must be usable by a keyboard and mouse******
@@ -73,18 +74,18 @@ function generateWelcomePageTemplate() {
 
 function generateQuestionTemplate(item) {
   // Code needs to create the page template for the question div of the quiz
-  return `<h2>Question ${store.questionNumber}</h2>
+  return `<h2>Question ${store.questionNumber + 1}</h2>
   <p>${item.question}</p>
   <div>
-      <form>
+      <form class="form">
           <label><input type="radio" name="selector" id="a" val="${item.answers[0]}">${item.answers[0]}</label>
           <label><input type="radio" name="selector" id="b" val="${item.answers[1]}">${item.answers[1]}</label>         
           <label><input type="radio" name="selector" id="c" val="${item.answers[2]}">${item.answers[2]}</label>
           <label><input type="radio" name="selector" id="d" val="${item.answers[3]}">${item.answers[3]}</label>
+          <div>
+            <button class="submit" id="submit-btn" type="submit">Submit</button>
+          </div>
       </form>
-  </div>
-  <div>
-      <button class="button" id="submit-btn" type="submit">Submit</button>
   </div>`;
   // **********above: may need to mve button in to form to make keyboard accesible***********
 
@@ -173,20 +174,29 @@ function handleStartQuiz(){
   });
 }
 
+function evaluateAnswer() {
+  console.log("hello");
+  /*let correct = generateCorrectAnswerTemplate();
+  let wrong = generateWrongAnswerTemplate();
+  let currentQuestion = store.questions[store.questionNumber];
+  let answer = `$(input[name=selector:checked]).value()`;
+  console.log(answer);
+  console.log(currentQuestion);
+  if (answer === currentQuestion.answer) {
+    render(correct);
+    } else { render(wrong);
+    };*/
+}
+
+
 function handleSubmitAnswer(){
   // Create an if statement that checks if the submitted answer choice was the correct answer
   //*** / 1.) If right, it will render a template with a happy meseeks with a positive statement and the running score
   //*** // 2.) If wrong, it will render a template with a meseeks filled with existential terror, a wrong answer informative statement and the running score
-  $("main").on("submit", "form", e =>{
-    e.preventDefault;
-    console.log("Reading Clicked");
-    let currentQuestion = store.questions[store.questionNumber];
-    let answer = $(`input[name=selector:checked]`).value();
-    if  (answer === currentQuestion.answer) {
-      generateCorrectAnswerTemplate();
-    } else { generateWrongAnswerTemplate();
-    };
-    render(answer);
+  $("div").on("submit", ".form", function(evt) {
+    evt.preventDefault;
+    console.log('Reading Clicked');
+    evaluateAnswer();
   });
 }
 // ***Need event listeners for buttons***
@@ -196,10 +206,10 @@ function handleSubmitAnswer(){
 
 
 function main() {
-  console.log(store.questions);
   handleStartQuiz();
-  let startPage = generateWelcomePageTemplate();
-  render(startPage);
+  handleSubmitAnswer();
+  generateWelcomePageTemplate();
+  render();
   
 }
 
