@@ -55,12 +55,14 @@ const store = {
 
 function generateWelcomePageTemplate() {
   // Code needs to generate the welcome page template to be displayed on the DOM in the main
-  const template = `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
+  let template = `<img src="images/showme.gif" alt="SHOW ME WHAT YOU GOT!">
   <h2>CLICK BELOW TO START!</h2>
   <div>
       <button class="button" id="start">Start Quiz</button> 
   </div>`;
+
   render(template);
+  
 
 
   // Must be usable by a keyboard and mouse******
@@ -72,21 +74,28 @@ function generateWelcomePageTemplate() {
   // Must render at the end
 }
 
-function generateQuestionTemplate(item) {
+function generateQuestionTemplate() {
   // Code needs to create the page template for the question div of the quiz
+  let item = store.questions[store.questionNumber];
   return `<h2>Question ${store.questionNumber + 1}</h2>
   <p>${item.question}</p>
   <div>
       <form class="form">
-          <label><input type="radio" name="selector" id="a" val="${item.answers[0]}">${item.answers[0]}</label>
-          <label><input type="radio" name="selector" id="b" val="${item.answers[1]}">${item.answers[1]}</label>         
-          <label><input type="radio" name="selector" id="c" val="${item.answers[2]}">${item.answers[2]}</label>
-          <label><input type="radio" name="selector" id="d" val="${item.answers[3]}">${item.answers[3]}</label>
+          <input type="radio" name="selector" id="a" value="${item.answers[0]}">
+          <label>${item.answers[0]}</label>
+          <input type="radio" name="selector" id="b" value="${item.answers[1]}">
+          <label>${item.answers[1]}</label>
+          <input type="radio" name="selector" id="c" value="${item.answers[2]}">         
+          <label>${item.answers[2]}</label>
+          <input type="radio" name="selector" id="d" value="${item.answers[3]}">
+          <label>${item.answers[3]}</label>
           <div>
             <button class="submit" id="submit-btn" type="submit">Submit</button>
           </div>
       </form>
   </div>`;
+
+  
   // **********above: may need to mve button in to form to make keyboard accesible***********
 
   // Must be usable by a keyboard and mouse******
@@ -144,9 +153,15 @@ function generateQuestionNumberTemplate() {
 
 function generateResultsTemplate() {
   // Code needs to create a template for the div that will show the final results page
-
+  console.log('generateResultsTemplate is running');
   // Users should be shown their overall score at the end of the quiz. In other words, how many questions they got right out of the total questions asked.
+  return `<h2 id="totalScore">Total Score</h2>
+            <img src="images/finaldance.gif">
+            <div>
+                <button class="button" id="retryQuiz">Retry</button>
+            </div>`;
 
+            
   // Users should be able to start a new quiz. ****add a button*** (button could theoretically reset the value of quiz score to 0?)
 
   // Must call the render function at end
@@ -167,25 +182,29 @@ function render(html) {
 
 // These functions handle events (submit, click, etc)
 function handleStartQuiz(){
-  $("main").on("click", "#start", e =>{
+  $("main").on("click", "#start", function(evt) {
+    evt.preventDefault();
     store.quizStarted = true;
-    let question = generateQuestionTemplate(store.questions[store.questionNumber]);
-    render(question);
+    render(generateQuestionTemplate());
+    
   });
 }
 
 function evaluateAnswer() {
-  console.log("hello");
-  /*let correct = generateCorrectAnswerTemplate();
-  let wrong = generateWrongAnswerTemplate();
+  console.log('hello');
+  let template = "";
   let currentQuestion = store.questions[store.questionNumber];
-  let answer = `$(input[name=selector:checked]).value()`;
-  console.log(answer);
+  console.log($('input[name="selector"]:checked'));
+  let answer = $('input[name="selector"]:checked').val();
+  console.log("The answer is" + answer);
   console.log(currentQuestion);
-  if (answer === currentQuestion.answer) {
-    render(correct);
-    } else { render(wrong);
-    };*/
+  if (answer === currentQuestion.correctAnswer) {
+    store.score++;
+    template = generateCorrectAnswerTemplate();
+    } else {
+      template = generateWrongAnswerTemplate();
+    };
+    render(template);
 }
 
 
@@ -193,10 +212,36 @@ function handleSubmitAnswer(){
   // Create an if statement that checks if the submitted answer choice was the correct answer
   //*** / 1.) If right, it will render a template with a happy meseeks with a positive statement and the running score
   //*** // 2.) If wrong, it will render a template with a meseeks filled with existential terror, a wrong answer informative statement and the running score
-  $("div").on("submit", ".form", function(evt) {
-    evt.preventDefault;
+  $("body").on("click", ".submit", function(evt) {
+    evt.preventDefault();
     console.log('Reading Clicked');
     evaluateAnswer();
+  });
+}
+
+function handleNextQuestion() {
+  $("body").on("click", "#nextQ", function(evt) {
+    evt.preventDefault();
+    console.log('handleNextQuestion is running');
+    store.questionNumber++;
+    let template = "";
+    if (store.questionNumber >= store.questions.length) {
+     template = generateResultsTemplate();
+    } else {
+      template = generateQuestionTemplate();
+    }
+    render(template);
+  });
+}
+
+function handleRetryQuiz() {
+  $("body").on("click", "#retryQuiz", function(evt) {
+    console.log('handleRetryQuiz is running');
+    store.quizStarted = false;
+    store.questionNumber = 0;
+    store.score = 0;
+    generateWelcomePageTemplate();
+    
   });
 }
 // ***Need event listeners for buttons***
@@ -208,8 +253,10 @@ function handleSubmitAnswer(){
 function main() {
   handleStartQuiz();
   handleSubmitAnswer();
+  handleNextQuestion();
+  handleRetryQuiz();
   generateWelcomePageTemplate();
-  render();
+  
   
 }
 
