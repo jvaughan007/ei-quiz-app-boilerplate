@@ -164,14 +164,14 @@ function generateQuestionTemplate() {
 
         <div class="align-left">
 
-        <input type="radio" name="selector" id="a" value="${item.answers[0]}">
-        <label>${item.answers[0]}</label>
-        <input type="radio" name="selector" id="b" value="${item.answers[1]}">
-        <label>${item.answers[1]}</label>
-        <input type="radio" name="selector" id="c" value="${item.answers[2]}">        
-        <label>${item.answers[2]}</label>
-        <input type="radio" name="selector" id="d" value="${item.answers[3]}">
-        <label>${item.answers[3]}</label>
+          
+          <label for='a'><input type="radio" name="selector" id="a" value="${item.answers[0]}">${item.answers[0]}</label>
+          
+          <label for='b'><input type="radio" name="selector" id="b" value="${item.answers[1]}">${item.answers[1]}</label>
+                  
+          <label for='c'><input type="radio" name="selector" id="c" value="${item.answers[2]}">${item.answers[2]}</label>
+          
+          <label for='d'><input type="radio" name="selector" id="d" value="${item.answers[3]}">${item.answers[3]}</label>
 
         </div>
 
@@ -207,9 +207,10 @@ function generateCorrectAnswerTemplate() {
 function generateWrongAnswerTemplate() {
   // Code needs to create a template for the wrong answer
   return `<h2>Wrong answer, broh!</h2>
+  <h3>It was ${store.questions[store.questionNumber].correctAnswer} DUH!</h3>
   <img src="images/donthate.gif" alt="Don't hate the player, hate the game, son!">
   <div class="score/questions">
-  <p>Ooh-la-la, your running score is ${store.score} out of ${store.questionNumber + 1}!</p>
+  <h3>Ooh-la-la, your running score is ${store.score} out of ${store.questionNumber + 1}!</h3>
   </div>
   <div>
   <p>You got *Uuurp* ${10 - (store.questionNumber + 1)} questions's left, don't be a Jerry.</p>
